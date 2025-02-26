@@ -1,6 +1,6 @@
 {
   "name": "bridge-zip",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "dist/index.js",
   "scripts": {
     "dev": "ts-node src/index.ts",
