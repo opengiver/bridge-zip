@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /**
  * Bridge Zip - Windows/macOS ZIP compatibility tool
  * Command-line interface for managing ZIP files across platforms

@@ -1,16 +1,21 @@
 {
   "name": "bridge-zip",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "0.0.1",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "ts-node src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": [
+    "window",
+    "macos",
+    "zip",
+    "Compatibility"
+  ],
+  "author": "Byungsker",
+  "license": "MIT",
+  "description": "A Node.js CLI tool that seamlessly connects zip files between Windows and macOS, enabling cross-platform compatibility and efficient file handling.",
   "dependencies": {
     "@types/node": "^22.13.5",
     "adm-zip": "^0.5.16",
@@ -18,10 +23,10 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   },
-  "bin": {
-    "bridge-zip": "bin/bridge-zip"
-  },
   "devDependencies": {
     "@types/adm-zip": "^0.5.7"
+  },
+  "bin": {
+    "bridge-zip": "dist/index.js"
   }
 }
