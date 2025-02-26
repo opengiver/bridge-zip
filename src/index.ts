@@ -1,29 +1,39 @@
+/**
+ * Bridge Zip - Windows/macOS ZIP compatibility tool
+ * Command-line interface for managing ZIP files across platforms
+ *
+ * @module index
+ */
 import { Command } from "commander";
 import { checkZipContents, unzipFile, renameFolder, zipFolder } from "./utils";
 
 const program = new Command();
 
-program
-  .name("bridge-zip")
-  .description("Bridge Zip (브릿집) - Windows/macOS ZIP 호환 도구")
-  .version("1.0.0");
+program.name("bridge-zip").description("Bridge Zip - Windows/macOS ZIP compatibility tool").version("1.0.0");
 
+/**
+ * Command to check the contents of a ZIP file
+ */
 program
   .command("check <zipFile>")
-  .description("압축 파일 내부의 폴더명을 확인")
+  .description("Check folder names inside the ZIP file")
   .action(async (zipFile) => {
     const contents = await checkZipContents(zipFile);
-    console.log("압축 내부 폴더명:", contents);
+    console.log("Internal folder names:", contents);
   });
 
+/**
+ * Command to convert a ZIP file by extracting it,
+ * renaming the internal folder, and compressing it again
+ */
 program
   .command("convert <zipFile> <newFolderName>")
-  .description("ZIP 파일을 풀고 내부 폴더명을 변경 후 다시 압축")
+  .description("Extract ZIP file, rename internal folder, and compress again")
   .action(async (zipFile, newFolderName) => {
     const extractedPath = await unzipFile(zipFile);
     const renamedPath = await renameFolder(extractedPath, newFolderName);
     const newZipFile = await zipFolder(renamedPath, zipFile);
-    console.log("변환 완료:", newZipFile);
+    console.log("Conversion completed:", newZipFile);
   });
 
 program.parse(process.argv);
