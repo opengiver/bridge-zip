@@ -17,14 +17,16 @@
   "license": "MIT",
   "description": "A Node.js CLI tool that seamlessly connects zip files between Windows and macOS, enabling cross-platform compatibility and efficient file handling.",
   "dependencies": {
-    "@types/node": "^22.13.5",
     "adm-zip": "^0.5.16",
-    "commander": "^13.1.0",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.7.3"
+    "cli-progress": "^3.12.0",
+    "commander": "^13.1.0"
   },
   "devDependencies": {
-    "@types/adm-zip": "^0.5.7"
+    "@types/adm-zip": "^0.5.7",
+    "@types/cli-progress": "^3.11.6",
+    "@types/node": "^22.13.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
   },
   "bin": {
     "bridge-zip": "dist/index.js"
