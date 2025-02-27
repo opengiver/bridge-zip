@@ -1,32 +1,17 @@
 # Bridge-Zip
 
 ![npm](https://img.shields.io/npm/v/bridge-zip)
+![npm](https://img.shields.io/npm/dt/bridge-zip)
+![npm bundle size](https://img.shields.io/bundlephobia/min/bridge-zip)
 ![license](https://img.shields.io/npm/l/bridge-zip)
 
 `Bridge-Zip` is a command-line utility designed to solve compatibility issues between ZIP files created on Windows and macOS systems. It provides seamless conversion of folder names and structures to ensure proper functionality across both operating systems.
 
-```mermaid
-sequenceDiagram
-    participant User as "User (CLI Executor)"
-    participant BridgeZip as "Bridge Zip CLI"
-    participant Memory as "Memory"
-    participant FileSystem as "File System"
-    
-    User->>BridgeZip: Provide ZIP file path and command
-    BridgeZip->>FileSystem: Check ZIP file location (on File System)
-    FileSystem-->>BridgeZip: File exists
-    BridgeZip->>FileSystem: Start unzipping (on File System)
-    FileSystem->>Memory: Read ZIP file contents into Memory
-    Memory-->>BridgeZip: Provide file list and contents
-    BridgeZip->>Memory: Rename folder (in Memory)
-    Memory->>FileSystem: Reflect renamed folder to File System
-    BridgeZip->>Memory: Start compressing folder (in Memory)
-    Memory->>FileSystem: Create compressed file on File System
-    FileSystem->>FileSystem: Delete temporary files (from File System)
-    BridgeZip->>User: Provide completion message and result (visible on File System)
+<br>
 
+<img src="https://github.com/user-attachments/assets/fc8e4be6-420c-4139-84ed-914d6dd30c8e" width="640">
 
-```
+<br>
 
 ## The Problem
 
