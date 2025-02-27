@@ -90,7 +90,7 @@ export const renameFolder = (oldPath: string, newName: string): string => {
  * @param originalZipPath - The original path where the ZIP file will be saved.
  * @returns The path of the resulting compressed ZIP file.
  */
-export const zipFolder = (folderPath: string, originalZipPath: string): string => {
+export const zipFolder = async (folderPath: string, originalZipPath: string): Promise<string> => {
   const zip = new AdmZip();
   const parentTempFolder = path.dirname(folderPath);
   const files = fs.readdirSync(folderPath);
@@ -124,31 +124,27 @@ export const zipFolder = (folderPath: string, originalZipPath: string): string =
   progressBar.stop();
   console.log("✅ Compression complete!");
 
-  // Add spinner for finalization
-  const spinner = new cliProgress.SingleBar(
-    {
-      format: "Finalizing [{bar}] {percentage}% | {value}/{total} files",
-      stopOnComplete: true,
-    },
-    cliProgress.Presets.shades_classic
-  );
+  const { default: cliSpinners } = await import("cli-spinners");
+  const spinner = cliSpinners.dots;
+  let frameIndex = 0;
 
-  spinner.start(100, 0);
-  let spinnerCount = 0;
+  process.stdout.write("Finalizing... ");
+
   const spinnerInterval = setInterval(() => {
-    spinnerCount++;
-    spinner.update(spinnerCount);
-    if (spinnerCount === 100) {
-      clearInterval(spinnerInterval);
-      spinner.stop();
-      console.log("✅ Finalization complete!");
-    }
-  }, 50);
+    process.stdout.write(`\rFinalizing... ${spinner.frames[frameIndex]}`);
+    frameIndex = (frameIndex + 1) % spinner.frames.length;
+  }, spinner.interval);
 
   const zipDir = path.dirname(originalZipPath);
   const outputZip = path.join(zipDir, `${path.basename(folderPath)}.zip`);
 
-  zip.writeZip(outputZip);
+  await new Promise<void>((resolve) => {
+    zip.writeZipPromise(outputZip).then(() => {
+      clearInterval(spinnerInterval);
+      process.stdout.write("\r✅ Finalization complete!\n");
+      resolve();
+    });
+  });
 
   fs.rmSync(folderPath, { recursive: true, force: true });
   if (parentTempFolder.includes("temp_")) {
