@@ -1,6 +1,11 @@
 {
   "name": "bridge-zip",
-  "version": "0.0.5",
+  "version": "0.0.6",
+  "description": "A Node.js CLI tool that seamlessly connects zip files between Windows and macOS, enabling cross-platform compatibility and efficient file handling.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opengiver/bridge-zip.git"
+  },
   "main": "dist/index.js",
   "scripts": {
     "dev": "ts-node src/index.ts",
@@ -15,7 +20,10 @@
   ],
   "author": "Byungsker",
   "license": "MIT",
-  "description": "A Node.js CLI tool that seamlessly connects zip files between Windows and macOS, enabling cross-platform compatibility and efficient file handling.",
+  "bugs": {
+    "url": "https://github.com/opengiver/bridge-zip/issues"
+  },
+  "homepage": "https://github.com/opengiver/bridge-zip#readme",
   "dependencies": {
     "adm-zip": "^0.5.16",
     "cli-progress": "^3.12.0",
