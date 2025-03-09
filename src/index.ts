@@ -8,10 +8,14 @@
  */
 import { Command } from "commander";
 import { checkZipContents, unzipFile, renameFolder, zipFolder } from "./utils";
+import packageJson from "../package.json";
 
 const program = new Command();
 
-program.name("bridge-zip").description("Bridge Zip - Windows/macOS ZIP compatibility tool").version("1.0.0");
+program
+  .name("bridge-zip")
+  .description("Bridge Zip - Windows/macOS ZIP compatibility tool")
+  .version(packageJson.version, "-v, --version");
 
 /**
  * Command to check the contents of a ZIP file
@@ -38,4 +42,20 @@ program
     console.log("Conversion completed:", newZipFile);
   });
 
+/**
+ * Command to check the version of the tool
+ */
+program
+  .command("version")
+  .alias("v")
+  .description("Display the current version of the tool")
+  .action(() => {
+    console.log("Current version:", program.version());
+  });
+
 program.parse(process.argv);
+
+if (process.argv.includes("-v") || process.argv.includes("--version")) {
+  console.log("Current version:", program.version());
+  process.exit(0);
+}
